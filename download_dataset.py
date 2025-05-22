@@ -7,6 +7,7 @@ import datasets
 from eval_helpers_qwen import preprocess_eval_function_gsm, preprocess_eval_function_csqa,preprocess_eval_function_piqa, preprocess_function, compute_metrics, truncate_or_pad
 
 # piqa_hf
+# piqa/valid-labels.lst and piqa/valid.jsonl load from https://github.com/ybisk/ybisk.github.io/tree/master/piqa/data
 formatted_result = {"question": [], "choices": [], "answerKey": []}
 label_path = "piqa/valid-labels.lst"
 data_path = "piqa/valid.jsonl"
@@ -29,6 +30,7 @@ dataset = Dataset.from_dict(formatted_result)
 dataset.save_to_disk("/nlp_group/huangwei12/Infer_research/quiet_star/huggingface_data_and_model/piqa_hf")
 
 # siqa
+# siqa/dev-labels.lst and siqa/dev.jsonl load from https://storage.googleapis.com/ai2-mosaic/public/socialiqa/socialiqa-train-dev.zip
 label_path = "siqa/dev-labels.lst"
 data_path = "siqa/dev.jsonl"
 map_dict = {1:"A",2:"B",3:"C"}
