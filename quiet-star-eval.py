@@ -45,12 +45,12 @@ def model_init(params):
     model_name = args.model_name
     print("Loading model")
     import sys
-    sys.path.append("/mmu_nlp_hdd/huangwei12/research/quiet-star-new/model_file")
+    sys.path.append("model_file")
     if "mistral" in model_name:
         print("load modeling_mistral")
         from modeling_mistral import MistralForCausalLM
         load_class = MistralForCausalLM
-        tokenizer_path = "/nlp_group/decapoda-research/Mistral-7B-v0.1"
+        tokenizer_path = "Mistral-7B-v0.1"
     if "qwen" in model_name:
         print("load modeling_qwen2")
         from modeling_qwen2 import Qwen2ForCausalLM
