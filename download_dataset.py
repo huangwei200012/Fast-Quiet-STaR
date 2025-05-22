@@ -5,6 +5,27 @@ import sys
 import json
 import datasets
 from eval_helpers_qwen import preprocess_eval_function_gsm, preprocess_eval_function_csqa,preprocess_eval_function_piqa, preprocess_function, compute_metrics, truncate_or_pad
+from datasets import load_dataset
+import datasets
+dataset_name='open-web-math/open-web-math'
+
+eval_dataset_gsm = load_dataset("gsm8k", "main", split="test", ignore_verifications=True)
+
+eval_dataset_csqa = load_dataset("tau/commonsense_qa", "default", split="validation", ignore_verifications=True)
+
+eval_dataset_gsm.save_to_disk("eval/gsm8k")
+eval_dataset_csqa.save_to_disk("eval/commonsense_qa")
+
+dataset = load_dataset(
+    dataset_name,
+    "en" if "c4" in dataset_name else "default",
+    split=f"train[:]",
+    ignore_verifications=True,
+    num_proc=16,
+)
+dataset.save_to_disk("open-web-math")
+
+
 
 # piqa_hf
 # piqa/valid-labels.lst and piqa/valid.jsonl load from https://github.com/ybisk/ybisk.github.io/tree/master/piqa/data
@@ -27,7 +48,7 @@ with open(data_path) as f1,open(label_path) as f2:
 dataset = Dataset.from_dict(formatted_result)
 
 # # Save the dataset to disk
-dataset.save_to_disk("/nlp_group/huangwei12/Infer_research/quiet_star/huggingface_data_and_model/piqa_hf")
+dataset.save_to_disk("eval/piqa_hf")
 
 # siqa
 # siqa/dev-labels.lst and siqa/dev.jsonl load from https://storage.googleapis.com/ai2-mosaic/public/socialiqa/socialiqa-train-dev.zip
@@ -49,15 +70,5 @@ with open(data_path) as f1,open(label_path) as f2:
 dataset = Dataset.from_dict(formatted_result)
 
 # # Save the dataset to disk
-dataset.save_to_disk("siqa_hf")
+dataset.save_to_disk("eval/siqa_hf")
 
-from datasets import load_dataset
-import datasets
-
-
-eval_dataset_gsm = load_dataset("gsm8k", "main", split="test", ignore_verifications=True)
-
-eval_dataset_csqa = load_dataset("tau/commonsense_qa", "default", split="validation", ignore_verifications=True)
-
-eval_dataset_gsm.save_to_disk("eval/gsm8k")
-eval_dataset_csqa.save_to_disk("eval/commonsense_qa")
