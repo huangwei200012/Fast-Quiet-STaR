@@ -1,4 +1,4 @@
-# Fast-Quiet-STaR
+# Fast Quiet-STaR: Thinking Without Thought Tokens
 
 Doneload dataset 
 ```python
