@@ -50,3 +50,14 @@ dataset = Dataset.from_dict(formatted_result)
 
 # # Save the dataset to disk
 dataset.save_to_disk("siqa_hf")
+
+from datasets import load_dataset
+import datasets
+
+
+eval_dataset_gsm = load_dataset("gsm8k", "main", split="test", ignore_verifications=True)
+
+eval_dataset_csqa = load_dataset("tau/commonsense_qa", "default", split="validation", ignore_verifications=True)
+
+eval_dataset_gsm.save_to_disk("eval/gsm8k")
+eval_dataset_csqa.save_to_disk("eval/commonsense_qa")
