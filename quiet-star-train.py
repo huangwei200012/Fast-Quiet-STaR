@@ -22,11 +22,11 @@ parser.add_argument("--n_ahead_talk_global", type=int, default=4)
 parser.add_argument("--n_ahead_global", type=int, default=12)
 parser.add_argument("--lr", type=float, default=1e-6)
 parser.add_argument("--mode", type=str, default="base")
-parser.add_argument("--data_path", type=str, default="/nlp_group/huangwei12/Infer_research/hugging_face_models_and_dataset/open-web-math")
+parser.add_argument("--data_path", type=str, default="open-web-math")
 parser.add_argument("--output_dir", type=str, default="")
 parser.add_argument("--max_train_length", type=int, default=256)
 parser.add_argument("--policy_loss_beta", type=float, default=1e6)
-parser.add_argument("--model_name", type=str, default="/nlp_group/huangwei12/r1_research/open-r1/huggingface_model/Qwen2.5-7B")
+parser.add_argument("--model_name", type=str, default="Qwen2.5-7B")
 args = parser.parse_args()
 print(args)
 policy_loss_beta = args.policy_loss_beta
@@ -69,7 +69,7 @@ def model_init(params):
     model_name = args.model_name
     import sys
     if "Qwen" in model_name or "qwen" in  model_name:
-        sys.path.append("/nlp_group/huangwei12/Infer_research/quiet_star/model_file")
+        sys.path.append("model_file")
         if args.mode=="base":
             from modeling_qwen2 import Qwen2ForCausalLM
             print("load modeling_qwen2")
@@ -77,9 +77,9 @@ def model_init(params):
             from modeling_qwen2_last import Qwen2ForCausalLM
             print("load modeling_qwen2_last")
         load_methed = Qwen2ForCausalLM
-        tokenizer_path = "/nlp_group/huangwei12/r1_research/open-r1/huggingface_model/Qwen2.5-7B"
+        tokenizer_path = "Qwen2.5-7B"
     elif "mistral" in model_name or "Mistral" in model_name:
-        sys.path.append("/mmu_nlp_hdd/huangwei12/research/quiet-star-new/model_file")
+        sys.path.append("model_file")
         if args.mode=="base":
             from modeling_mistral import MistralForCausalLM
             print("load modeling_mistral")
@@ -87,7 +87,7 @@ def model_init(params):
             from modeling_mistral_last import MistralForCausalLM
             print("load modeling_mistral_last")
         load_methed = MistralForCausalLM
-        tokenizer_path = "/nlp_group/decapoda-research/Mistral-7B-v0.1"
+        tokenizer_path = "Mistral-7B-v0.1"
     else:
         print("Error !!!")
     print("Loading model")
