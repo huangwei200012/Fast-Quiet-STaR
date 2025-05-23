@@ -1,6 +1,6 @@
 # Fast Quiet-STaR: Thinking Without Thought Tokens
 
-Doneload dataset 
+Download dataset 
 ```python
 python download_dataset.py
 ```
