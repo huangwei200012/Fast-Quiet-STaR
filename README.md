@@ -1,9 +1,5 @@
 # Fast Quiet-STaR: Thinking Without Thought Tokens
 
-Download dataset 
-```python
-python download_dataset.py
-```
 Training and eval Fast Quiet-STaR
 ```bash
 bash run_sh\fast_quiet_star_mistral.sh
